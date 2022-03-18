@@ -107,14 +107,20 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Closing brackets
-inoremap " ""<left>
-inoremap ' ''<left>
 inoremap [ []<left>
 inoremap { {}<left>
+inoremap ( ()<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 inoremap [<CR> [<CR>]<ESC>O
 inoremap [;<CR> [<CR>];<ESC>O
+inoremap (<CR> (<CR>)<ESC>O
+inoremap (;<CR> (<CR>);<ESC>O
+
+" Jump over closing bracket if cursor is already on it
+inoremap <expr> } JumpOver('}')
+inoremap <expr> ] JumpOver(']')
+inoremap <expr> ) JumpOver(')')
 
 " ALE mappings (See PLUGINS section)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -224,4 +230,14 @@ function! ToggleMouse()
     endif
 endfunc
 
+function! JumpOver(char)
+    " Jumps over a character if the cursor is already on it
+    if getline(".")[col(".")-1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+
 " }}}
+

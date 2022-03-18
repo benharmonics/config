@@ -1,11 +1,11 @@
-"
+
 " NOTE: If you've never seen the section folding behavior in this .vimrc, you
 " might be confused as to how to open and edit each section when using vim.
-"
+
 " In normal mode, `zo` unfolds each section and `zc` folds them again. The 
 " folding behavior comes from the `augroup` function defined in the 
 " PROGRAMMING MACROS section below.
-"
+
 " MAIN OPTIONS --------------------------------------------------------- {{{
 
 " Set 'nocompatible' to ward off unexpected things that your distro might have
@@ -105,6 +105,16 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until next
 " search
 nnoremap <C-L> :nohl<CR><C-L>
+
+" Closing brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+inoremap [<CR> [<CR>]<ESC>O
+inoremap [;<CR> [<CR>];<ESC>O
 
 " ALE mappings (See PLUGINS section)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)

@@ -1,4 +1,10 @@
 
+"       (_)                   
+" __   ___ _ __ ___  _ __ ___ 
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+" (_)_/ |_|_| |_| |_|_|  \___|
+                            
 " NOTE: If you've never seen the section folding behavior in this .vimrc, you
 " might be confused as to how to open and edit each section when using vim.
 
@@ -122,9 +128,7 @@ inoremap <expr> } JumpOver('}')
 inoremap <expr> ] JumpOver(']')
 inoremap <expr> ) JumpOver(')')
 
-" ALE mappings (See PLUGINS section)
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" ALE mappings: see PLUGINS section
 
 " }}}
 
@@ -211,9 +215,13 @@ call plug#end()
 " Rainbow brackets
 let g:rainbow_active = 1
 
-" Rust Asynchronous Linting with rust-analyzer
+" Asynchronous Linting with ALE
 let g:ale_linters = { 'rust': ['analyzer'], 'python': ['pylint'], }
 let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
+
+" ALE mappings
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " }}}
 

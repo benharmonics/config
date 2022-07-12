@@ -15,21 +15,17 @@ let mapleader = ","
 
 syntax on
 
-" Sets the line numbers, then changes all but the current line number to
-" relative line numbers.
-set number
-set relativenumber
+" Relative line numbers except for current line
+set number relativenumber
 
 " Split sanity
-set splitbelow
-set splitright
+set splitbelow splitright
 
 " Highlight searches
 set hlsearch
 
 " Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
+set ignorecase smartcase
 
 " Stop certain movements from always going to the first character of a line.
 " While this behavior deviates from that of Vi, it does what most users coming
@@ -57,14 +53,24 @@ set nowrap
 " Enable mouse support
 set mouse=a
 
-" The following settings in this section are required for coc.nvim
+set encoding=utf-8
+
+" Subsection: Plugin Options {{{
+
+" https://github.com/luochen1990/rainbow
+let g:rainbow_active=1
+
+" }}} Plugin Options
+
+" ===== The following subsection is required for coc.nvim ===== "
+
+" Subsection: CoC {{{
 
 " TextEdit might fail if hidden is not set
 set hidden
 
 " Some servers have issues with backup files
-set nobackup
-set nowritebackup
+set nobackup nowritebackup
 
 " Having longer updatetime (default is 4000ms) leads to
 " noticable delays and poor user experience.
@@ -82,15 +88,15 @@ else
   set signcolumn=yes
 endif
 
+" }}} CoC
+
 " }}}
 
 " Indentation Options ------------------------------------------------- {{{
 
 " Indentation settings for using 4 spaces instead of tabs. Do not change
 " 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=4
-set softtabstop=4
-set expandtab
+set shiftwidth=4 softtabstop=4 expandtab smarttab
 
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
@@ -99,12 +105,28 @@ set backspace=indent,eol,start
 " the same indent as the line you're currently on. Useful for README files.
 set autoindent
 
+" VIM
+autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" HTML, XML
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Markdown, Journal
+autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" This will enable code folding using the marker method (as in this file).
+augroup filetype_vim
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
 " }}}
 
 " Status Options ------------------------------------------------------ {{{
 
-" Clear status line when vimrc is reloaded
-set statusline=
+set statusline= " Clear status line when vimrc is reloaded
 
 set statusline+=%n\ %F\     " buffer + file name
 set statusline+=%h%m%r%w\   " flags
@@ -122,69 +144,83 @@ set laststatus=2
 
 " Functions And Macros ------------------------------------------------ {{{
 
-" Programming Macros
-
 " Save & execute file
 function Run()
-"  Rust - compile and run (cargo run)
-  if &filetype ==# 'rust'
-    !cargo run
+  "  Rust
+  if &filetype ==# 'rust' | !cargo run
+  " Python
+  elseif &filetype ==# 'python' | !python %
+  " Shell
+  elseif &filetype ==# 'bash' || &filetype ==# 'zsh' || &filetype ==# 'sh' || &filetype ==# 'fsh'
+    !chmod +x %:p && %:p
+  " C
+  elseif &filetype ==# 'c' | !gcc % && ./a.out
   endif
-" C - save, compile and run program
-  if &filetype ==# 'c'
-    :w
-    !gcc % && ./a.out
-  endif
-" Python - save & run file
-  if &filetype ==# 'python'
-    :w
-    !python %
-  endif
-endfunction
-
-" Rust - check compiler (cargo check; this is faster than cargo run)
-function Check()
-  if &filetype ==# 'rust'
-    !cargo check
-  endif
-endfunction
-
-" Rust - run all tests.
-function Test()
-    if &filetype ==# 'rust'
-        !cargo test
-    endif
 endfunction
 
 command R :w <bar> execute Run()
 
-command C :w <bar> execute Check()
-
-command T :w <bar> execute Test()
 
 " Turn Mouse On/Off
 function! ToggleMouse()
-    " check if mouse is enabled
-    if &mouse == 'a'
-        " disable
-        set mouse=
-    else
-        " enable mouse everywhere
-        set mouse=a
-    endif
+  " check if mouse is enabled
+  if &mouse == 'a'
+    " disable
+    set mouse=
+  else
+    " enable mouse everywhere
+    set mouse=a
+  endif
 endfunc
 
 command Mouse execute ToggleMouse()
 
 " We have a remapping that uses this function to mimic IDE behavior
 function! JumpOver(char)
-    " Jumps over a character if the cursor is already on it
-    if getline(".")[col(".")-1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
+  " Jumps over a character if the cursor is already on it
+  if getline(".")[col(".")-1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
 endfunction
+
+" Subsection: Rust {{{
+
+" cargo check
+function Check()
+  if &filetype ==# 'rust'
+    !cargo check
+  endif
+endfunction
+
+" cargo test
+function Test()
+  if &filetype ==# 'rust'
+    !cargo test
+  endif
+endfunction
+
+" cargo fmt
+function Fmt()
+  if &filetype ==# 'rust'
+    !cargo fmt
+  endif
+endfunction
+
+" cargo clippy
+function Clippy()
+  if &filetype ==# 'rust'
+    !cargo clippy
+  endif
+endfunction
+
+command Check :w <bar> execute Check()
+command Test :w <bar> execute Test()
+command Fmt :w <bar> execute Fmt()
+command Clippy :w <bar> execute Clippy()
+
+" }}} Rust
 
 " }}}
 
@@ -214,9 +250,7 @@ inoremap <expr> } JumpOver('}')
 inoremap <expr> ] JumpOver(']')
 inoremap <expr> ) JumpOver(')')
 
-" }}}
-
-" CoC Mappings -------------------------------------------------------- {{{
+" Subsection: CoC Mappings {{{
 
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
@@ -228,20 +262,20 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0 )
-	execute 'h '.expand('<cword>')
-    else
-	call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0 )
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -253,9 +287,9 @@ endfunction
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -351,23 +385,19 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}} CoC Mappings
 
 " }}}
 
-" Plugin Options ------------------------------------------------------ {{{
+" Terminal Options ---------------------------------------------------- {{{
 
-" https://github.com/luochen1990/rainbow
-let g:rainbow_active=1
+tmap <Esc> <C-\><C-n>
+tmap <C-w> <Esc><C-w>
+autocmd TermOpen * startinsert  " go to insert mode immediately
+autocmd TermClose * :q  " don't show exit code, just close
 
-" }}}
-
-" Augroup ------------------------------------------------------------- {{{
-
-" This will enable code folding using the marker method (as in this file).
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
+" Have terminal open in a split pane rather than current window
+command! -nargs=* T split | terminal <args>
 
 " }}}
 
@@ -375,6 +405,7 @@ augroup END
 
 " The following lines need to go at the end of your vimrc file
 
+" ======================== Vim-Plug ======================== "
 " Load all plugins now
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall

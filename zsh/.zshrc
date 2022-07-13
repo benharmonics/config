@@ -72,14 +72,9 @@ ZSH_THEME="custom"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    sudo
-    copypath
-    copyfile
     dirhistory
     rust
     zsh-autosuggestions
-    fd
-    gh
     web-search
 )
 
@@ -118,8 +113,24 @@ unsetopt BEEP
 export PATH="$PATH:/opt/julia-1.7.1/bin"
 # Add .cargo to PATH
 export PATH="$PATH:/home/ben/.cargo/bin" 
-# py=python3
+
+# Aliases
+# Rename exa as ls
+alias ls=exa
+alias ll="exa -l"
+# Python
 alias py=python3
+
+# Personal Scripts
+# alias ramcheck="$HOME/.local/bin/ramcheck.sh"
+# alias getwallpapers="$HOME/.local/bin/getwallpapers.sh"
+alias wallpaper=$HOME/.local/scripts/random_wallpaper/script.sh
+
+# AppImages
+alias musescore="$HOME/AppImages/MuseScore-3.6.2.AppImage"
+
+# API Keys
+export APOD_KEY=$(cat $HOME/documents/apikeys/apodkey.txt)
 
 # Init Zoxide on shell startup
 eval "$(zoxide init zsh)"

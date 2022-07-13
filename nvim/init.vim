@@ -391,13 +391,13 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Terminal Options ---------------------------------------------------- {{{
 
-tmap <Esc> <C-\><C-n>
-tmap <C-w> <Esc><C-w>
+tmap <Esc> <C-\><C-n>           " go to 'normal' mode 
+tmap <C-w> <Esc><C-w>           " enables c-w-w to change back to the other window
 autocmd TermOpen * startinsert  " go to insert mode immediately
-autocmd TermClose * :q  " don't show exit code, just close
+autocmd TermClose * :q          " don't show exit code, just close
 
 " Have terminal open in a split pane rather than current window
-command! -nargs=* T split | terminal <args>
+command! -nargs=* T w | split | terminal <args>
 
 " }}}
 

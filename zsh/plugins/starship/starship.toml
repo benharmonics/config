@@ -1,0 +1,54 @@
+# ~/.config/starship.toml
+
+add_newline = false
+
+[username]
+style_user = "bold cyan"
+format = "[$user]($style) ∈ "
+show_always = true
+
+[hostname]
+format = "[$hostname]($style):"
+style = "bold dimmed white"
+
+[directory]
+format = """[$path](italic green)[$lock_symbol]($lock_style) """
+
+[character]
+success_symbol = "[❯](bold yellow)[❯](bold cyan)[❯](bold purple)"
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+style = "bold yellow"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+#[git_state]
+#format = "[\($state( $progress_current of $progress_total)\)]($style) "
+
+[git_status]
+style = "bright white"
+format = "$all_status$head_behind"
+
+[package]
+disabled = true
+
+[line_break]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+# Nerd Fonts
+[julia]
+format = "[$symbol$verion](style)"
+style = "bold green"
+
+[python]
+format = "[$symbol$version]($style)"
+style = "bold green"
+
+[rust]
+format = "[$symbol$version]($style)"

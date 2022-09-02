@@ -55,22 +55,23 @@ set mouse=a
 
 set encoding=utf-8
 
-" }}}
+" }}} \Main Options
 
-" Plugins {{{
+" Plugins ------------------------------------------------------------- {{{
 
 call plug#begin()
 
 Plug 'luochen1990/rainbow'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'preservim/nerdtree'
+" Maybe install https://github.com/hrsh7th/nvim-cmp (completion engine)
 
 call plug#end()
 
-" https://github.com/luochen1990/rainbow
 let g:rainbow_active=1
 
-" }}}
+" }}} \Plugins
 
 " Indentation ------------------------------------------------- {{{
 
@@ -97,12 +98,16 @@ autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
+" Text
+autocmd FileType text setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType text setlocal wrap foldmethod=marker
+
 " This will enable code folding using the marker method (as in this file).
 augroup filetype_vim
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" }}}
+" }}} \Indentation
 
 " Statusline ------------------------------------------------------ {{{
 
@@ -120,9 +125,9 @@ set statusline+=\ %p%%          " percentage of file
 " Always display the status line, even if only one window is displayed
 set laststatus=2
 
-" }}}
+" }}} \Statusline
 
-" Functions & Macros ------------------------------------------------ {{{
+" Functions & Macros -------------------------------------------------- {{{
 
 " Save & execute file
 function Run()
@@ -135,6 +140,7 @@ function Run()
     !chmod +x %:p && %:p
   " C
   elseif &filetype ==# 'c' | !gcc % && ./a.out
+  elseif &filetype ==# 'javascript' | !node .
   endif
 endfunction
 
@@ -199,9 +205,9 @@ command Test :w <bar> execute Test()
 command Fmt :w <bar> execute Fmt()
 command Clippy :w <bar> execute Clippy()
 
-" }}} Rust
+" }}} \Rust
 
-" }}}
+" }}} \Functions & Macros
 
 " Mappings ------------------------------------------------------------ {{{
 
@@ -229,19 +235,26 @@ inoremap <expr> } JumpOver('}')
 inoremap <expr> ] JumpOver(']')
 inoremap <expr> ) JumpOver(')')
 
-" }}}
+" NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
-" Terminal Options ---------------------------------------------------- {{{
+" }}} \Mappings
+
+" Terminal ------------------------------------------------------------ {{{
 
 tmap <Esc> <C-\><C-n>           " go to 'normal' mode 
 tmap <C-w> <Esc><C-w>           " enables c-w-w to change back to the other window
-autocmd TermOpen * startinsert  " go to insert mode immediately
-autocmd TermClose * :q          " don't show exit code, just close
+" The following two lines may cause an error occasionally
+" autocmd TermOpen * startinsert  " go to insert mode immediately
+" autocmd TermClose * :q          " don't show exit code, just close
 
 " Have terminal open in a split pane rather than current window
 command! -nargs=* T w | split | terminal <args>
 
-" }}}
+" }}} \Terminal
 
 " Coda ---------------------------------------------------------------- {{{
 
@@ -255,4 +268,4 @@ packloadall
 " All messages and errors will be ignored.
 silent! helptags ALL
 
-" }}}
+" }}} \Coda

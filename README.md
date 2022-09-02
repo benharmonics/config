@@ -1,5 +1,5 @@
 # config
-My personal configuration files for programs like Neovim, zsh, etc. I try to keep it somewhat minimal, but I do a lot of development using Neovim so this configuration is a little bloated...
+My personal configuration files for programs like Neovim, zsh, etc. I try to keep it somewhat minimal, but I do a lot of development using Neovim so this configuration is a little bloated... Also, honestly, I don't use Vim or bash anymore, but I've kept the config files for posterity anyway.
 
 I use a slightly different .zshrc for work (on MacOS). The one included in this repository is what I use on WSL2. I'll probably include the one I use for work at some point but it's not really a huge difference.
 

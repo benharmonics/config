@@ -3,6 +3,8 @@ My personal configuration files for programs like Neovim, zsh, etc. I try to kee
 
 I use a slightly different .zshrc for work (on MacOS). The one included in this repository is what I use on WSL2. I'll probably include the one I use for work at some point but it's not really a huge difference.
 
+If you clone this repository into your `$HOME` directory (on UNIX), you should just be able to `mv config .config`, install the tools listed below, and everything should be good-to-go. 👍
+
 ## Tools to install
 
 You should install [Zoxide](https://github.com/ajeetdsouza/zoxide) (to use instead of `cd`), [Starship](https://starship.rs/installing/) (for a pretty neat prompt), and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions). zsh-autosuggestions needs to be installed manually; I would suggest `git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh` (you may need to create this directory).

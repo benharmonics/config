@@ -12,13 +12,21 @@ format = "[$hostname]($style):"
 style = "bold dimmed white"
 
 [directory]
-format = """[$path](italic green)[$lock_symbol]($lock_style) """
+format = "[$path](italic green)[$lock_symbol]($lock_style) "
 
 [character]
 success_symbol = "[❯](bold yellow)[❯](bold cyan)[❯](bold purple)"
+error_symbol = "[❯](bold bright-red)[❯](bold red)[❯](bold yellow)"
+vimcmd_symbol = "[❮](bold yellow)[❮](bold cyan)[❮](bold purple)"
+
+[battery]
+full_symbol = "🔋 "
+empty_symbol = "💀 "
+charging_symbol = "⚡ "
+discharging_symbol = "🪫 "
 
 [git_branch]
-format = " [$symbol$branch]($style) "
+format = "[$branch]($style) "
 style = "bold yellow"
 
 [git_commit]
@@ -41,14 +49,22 @@ disabled = true
 [cmd_duration]
 disabled = true
 
-# Nerd Fonts
+[aws]
+disabled = true
+
 [julia]
 format = "[$symbol$verion](style)"
 style = "bold green"
 
+[golang]
+format = "[🐹$version]($style)"
+
 [python]
-format = "[$symbol$version]($style)"
+format = "[🐍$version]($style)"
 style = "bold green"
 
 [rust]
-format = "[$symbol$version]($style)"
+format = "[🦀$version]($style)"
+
+[nodejs]
+format = "[🤖$version]($style)"

@@ -9,8 +9,8 @@ local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
 -- General
 ------------------------------------------------------------------------
 g.mapleader = ','
-vim.cmd('syntax enable')
-opt.mouse = 'a'                 -- Enable mous
+vim.cmd[[syntax enable]]
+opt.mouse = 'a'                 -- Enable mouse
 opt.clipboard = 'unnamedplus'   -- Copy/paste to system clipboard
 
 ------------------------------------------------------------------------
@@ -32,8 +32,6 @@ opt.cmdheight = 2           -- Set command window to 2 lines
 opt.wrap = false            -- Don't wrap text
 opt.encoding = 'utf-8'      -- Text encoding
 
-
-
 ------------------------------------------------------------------------
 -- Tabs, indentation
 ------------------------------------------------------------------------
@@ -43,5 +41,5 @@ opt.expandtab = true
 opt.smarttab = true
 opt.autoindent = true
 opt.backspace = 'indent,eol,start' -- Allow backspacing over autoindent, line breaks, & start of insert action
-vim.cmd('set nostartofline')
+vim.cmd[[set nostartofline]]
 

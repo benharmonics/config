@@ -13,6 +13,18 @@ vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = false, silent = true })
 -- Map <C-L> (redraw screen) to also turn off search highlighting until next search
 nmap('<c-l>', ':nohl<cr><c-l>')
 
+-- Easily resize window
+nmap('<leader>+', '<c-w>+')
+nmap('<leader>-', '<c-w>-')
+nmap('<leader>>', '<c-w>>')
+nmap('<leader><', '<c-w><')
+
+-- Easily swap between open windows
+nmap('<leader>h', '<c-w>h')
+nmap('<leader>l', '<c-w>l')
+nmap('<leader>j', '<c-w>j')
+nmap('<leader>k', '<c-w>k')
+
 -- Closing brackets
 imap('{', '{}<left>')
 imap('[', '[]<left>')
@@ -43,6 +55,6 @@ nmap('<leader>t', ':NERDTreeToggle<cr>')
 nmap('<c-f>t', ':NERDTreeFind<cr>')
 
 -- Terminal
-tmap('<esc>', '<C-\\><C-n>')  -- go to normal mode in terminal mode
-tmap('<C-w>', '<esc><C-w>') -- enables C-w-w to change back to other window
+tmap('<esc>', '<c-\\><c-n>')  -- go to normal mode in terminal mode
+tmap('<c-w>', '<esc><c-w>') -- enables C-w-w to change back to other window
 

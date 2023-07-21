@@ -16,6 +16,8 @@ lua require('init')
 function Run()
   "  Rust
   if &filetype ==# 'rust' | !cargo run
+  " Golang
+  elseif &filetype ==# 'go' | !go run main.go
   " Python
   elseif &filetype ==# 'python' | !python %
   " C
@@ -65,8 +67,6 @@ endfunc
 
 command! -nargs=? Pad :call PaddedComment(<f-args>)
 
-" Subsection: Rust ---------------------------------------------------- {{{
-
 " cargo check
 function Check()
   if &filetype ==# 'rust'
@@ -100,27 +100,12 @@ command Test :w <bar> execute Test()
 command Fmt :w <bar> execute Fmt()
 command Clippy :w <bar> execute Clippy()
 
-" }}} Rust
-
 " }}}
 
 " Terminal Options ---------------------------------------------------- {{{
 
-" Have terminal open in a split pane rather than current window
-command! -nargs=* T w | split | terminal <args>
+  " Have terminal open in a split pane rather than current window
+  command! -nargs=* T w | split | terminal <args>
 
-" }}} \Terminal Options
+  " }}} \Terminal Options
 
-" Coda ---------------------------------------------------------------- {{{
-
-" The following lines need to go at the end of your init.vim file
-
-" ------------------------ Vim-Plug ------------------------
-" Load all plugins now
-" Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL
-
-" }}}

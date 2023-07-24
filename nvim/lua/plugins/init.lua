@@ -1,40 +1,48 @@
-local Plug = vim.fn['plug#']
+-- Packer package management setup
+require'packer'.startup(function(use)
+  -- Packer manages itself
+  use 'wbthomason/packer.nvim'
 
-vim.call('plug#begin')
+  -- LSP & hrsh7th's plugin set
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+  -- LSP tools
+  use 'simrat39/rust-tools.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'mfussenegger/nvim-dap'
 
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'preservim/nerdtree'
-Plug 'simrat39/rust-tools.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'mfussenegger/nvim-dap'
+  -- Treesitter
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- Language tools
+  use 'ray-x/go.nvim'
 
-Plug 'luochen1990/rainbow'
-Plug 'dracula/vim'
-Plug 'rafamadriz/neon'
--- Plug 'Th3Whit3Wolf/space-nvim' -- ok, very dark
+  -- Misc
+  use 'preservim/nerdtree'
+  use 'nvim-lualine/lualine.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
 
-vim.call('plug#end')
+  -- Colorschemes
+  use 'rafamadriz/neon'
+  use { 'Mofiqul/dracula.nvim', as = 'dracula' }
+  use 'marko-cerovac/material.nvim'
+  use 'luochen1990/rainbow'
+end)
 
--- Rainbow brackets
-vim.g.rainbow_active = 1
+vim.g.rainbow_active = true
 
--- Colorscheme options
-vim.cmd('colorscheme neon')
-vim.g.neon_italic_variable = 1
-vim.g.neon_italic_function = 1
+vim.cmd[[colorscheme dracula]]
 
 require'plugins/tree'
 require'plugins/lsp'
 require'plugins/autocompletion'
 require'plugins/statusline'
+require'plugins/indent'
+require'plugins/languages'
 

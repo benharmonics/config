@@ -2,7 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
 -- Transparent packground
 autocmd('Colorscheme', {
-  command = 'highlight Normal ctermbg=NONE guibg=NONE'
+  command = 'highlight normal ctermbg=none guibg=none'
 })
 
 -- Fold text within markers
@@ -21,6 +21,12 @@ autocmd('FileType', {
 autocmd('FileType', {
   pattern = { 'go' },
   command = 'setlocal noexpandtab tabstop=4 shiftwidth=4'
+})
+
+-- Set Rust indent
+autocmd('FileType', {
+  pattern = { 'rust' },
+  command = 'setlocal shiftwidth=2 softtabstop=2'
 })
 
 -- go to insert mode immediately when entering terminal

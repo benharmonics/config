@@ -12,6 +12,8 @@ g.mapleader = ','
 vim.cmd[[syntax enable]]
 opt.mouse = 'a'                 -- Enable mouse
 opt.clipboard = 'unnamedplus'   -- Copy/paste to system clipboard
+-- Have terminal open in a split pane rather than current window
+vim.cmd([[command! -nargs=* T w | split | terminal <args>]])
 
 ------------------------------------------------------------------------
 -- UI

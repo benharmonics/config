@@ -1,4 +1,4 @@
-"__          __   __                  __
+"  __          __   __                  __
 " |  \        |  \ |  \                |  \
 "  \▓▓_______  \▓▓_| ▓▓_      __     __ \▓▓______ ____
 " |  \       \|  \   ▓▓ \    |  \   /  \  \      \    \
@@ -10,7 +10,6 @@
 
 lua require('init')
 
-" Functions & Macros ------------------------------------------------ {{{
 
 " Save & execute file
 function Run()
@@ -99,13 +98,4 @@ command Check :w <bar> execute Check()
 command Test :w <bar> execute Test()
 command Fmt :w <bar> execute Fmt()
 command Clippy :w <bar> execute Clippy()
-
-" }}}
-
-" Terminal Options ---------------------------------------------------- {{{
-
-  " Have terminal open in a split pane rather than current window
-  command! -nargs=* T w | split | terminal <args>
-
-  " }}} \Terminal Options
 

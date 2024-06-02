@@ -5,13 +5,16 @@
 #  .emacs.d: 
 #  a.out: 
 extension:
-  #  go: 
-  #  hs: 
+  go: 🐹
   rs: 🦀
+  py: 🐍
+  js: 🤖
+  ts: 🤖
+  #  hs: 
 filetype:
-  dir: 📂
-  file: 📄
-  pipe: 📩
+  #dir: 📂
+  #file: 📄
+  #pipe: 📩
   # socket: 󰆨
   # executable: 
   # symlink-dir: 

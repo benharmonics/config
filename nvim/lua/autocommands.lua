@@ -19,7 +19,7 @@ autocmd('FileType', {
 
 -- Set Golang indent
 autocmd('FileType', {
-  pattern = { 'go' },
+  pattern = { 'go', 'templ' },
   command = 'setlocal noexpandtab tabstop=4 shiftwidth=4'
 })
 
@@ -53,6 +53,11 @@ autocmd('BufLeave', {
 autocmd('BufWritePre', {
   pattern = '',
   command = ":%s/\\s\\+$//e"
+})
+
+autocmd({ "BufWritePre" }, {
+  pattern = { "*.templ" },
+  callback = vim.lsp.buf.format
 })
 
 -- Run gofmt and goimport for Golang files on save

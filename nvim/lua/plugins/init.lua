@@ -17,6 +17,10 @@ require'packer'.startup(function(use)
   use 'simrat39/rust-tools.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'mfussenegger/nvim-dap'
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -36,7 +40,6 @@ require'packer'.startup(function(use)
 end)
 
 vim.g.rainbow_active = true
-
 vim.cmd[[colorscheme dracula]]
 
 require'plugins/tree'
@@ -45,4 +48,5 @@ require'plugins/autocompletion'
 require'plugins/statusline'
 require'plugins/indent'
 require'plugins/languages'
+require'plugins/telescope'
 

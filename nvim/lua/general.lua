@@ -1,7 +1,6 @@
 ------------------------------------------------------------------------
 -- General Neovim settings and configuration
 ------------------------------------------------------------------------
-
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
 
@@ -14,6 +13,7 @@ opt.mouse = 'a'                 -- Enable mouse
 opt.clipboard = 'unnamedplus'   -- Copy/paste to system clipboard
 -- Have terminal open in a split pane rather than current window
 vim.cmd([[command! -nargs=* T w | split | terminal <args>]])
+vim.filetype.add({ extension = { templ = "templ" } })
 
 ------------------------------------------------------------------------
 -- UI

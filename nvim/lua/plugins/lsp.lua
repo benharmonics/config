@@ -1,16 +1,3 @@
--- Rust Tools
-local rt = require'rust-tools'
-rt.setup({
-  server = {
-      on_attach = function(_, bufnr)
-        -- Hover actions
-        vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
-        -- Code action groups
-        vim.keymap.set('n', '<leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
-      end,
-    },
-})
-
 -- Setup language servers.
 local capabilities = require'cmp_nvim_lsp'.default_capabilities()
 local lspconfig = require'lspconfig'
@@ -18,6 +5,41 @@ lspconfig.clangd.setup { capabilities = capabilities }
 lspconfig.gopls.setup { capabilities = capabilities }
 lspconfig.pyright.setup { capabilities = capabilities }
 lspconfig.tsserver.setup { capabilities = capabilities }
+lspconfig.templ.setup { capabilities = capabilities }
+lspconfig.hls.setup{ capabilities = capabilities }
+--lspconfig.htmx.setup({
+--    capabilities = capabilities,
+--    filetypes = { "html", "templ" },
+--})
+lspconfig.tailwindcss.setup({
+    capabilities = capabilities,
+    filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    settings = {
+      tailwindCSS = {
+        includeLanguages = {
+          templ = "html",
+        },
+      },
+    },
+})
+--lspconfig.rust_analyzer.setup{
+--  settings = {
+--    ['rust-analyzer'] = {}
+--  }
+--}
+
+-- Rust Tools
+local rt = require'rust-tools'
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set('n', '<leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+    },
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

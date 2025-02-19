@@ -13,24 +13,30 @@ require'packer'.startup(function(use)
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
 
-  -- LSP tools
-  use 'simrat39/rust-tools.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'mfussenegger/nvim-dap'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   -- Language tools
+  use 'simrat39/rust-tools.nvim'
   use 'ray-x/go.nvim'
+  use {
+    'nvim-flutter/flutter-tools.nvim',
+    requires = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+  }
 
   -- Misc
   use 'preservim/nerdtree'
   use 'nvim-lualine/lualine.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
+  -- use { 'shortcuts/no-neck-pain.nvim', tag = '*' }
 
   -- Colorschemes
   use 'rafamadriz/neon'

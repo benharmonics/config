@@ -8,39 +8,7 @@
 " | ▓▓ ▓▓  | ▓▓ ▓▓  \▓▓  ▓▓  \   \▓▓▓  | ▓▓ ▓▓ | ▓▓ | ▓▓
 "  \▓▓\▓▓   \▓▓\▓▓   \▓▓▓▓ \▓▓    \▓    \▓▓\▓▓  \▓▓  \▓▓
 
-lua require('init')
-
-
-" Save & execute file
-function Run()
-  "  Rust
-  if &filetype ==# 'rust' | !cargo run
-  " Golang
-  elseif &filetype ==# 'go' | !go run main.go
-  " Python
-  elseif &filetype ==# 'python' | !python %
-  " C
-  elseif &filetype ==# 'c' | !gcc % && ./a.out
-  " JavaScript
-  elseif &filetype ==# 'javascript' | !node .
-  " Shell
-  elseif &filetype ==# 'bash' || &filetype ==# 'zsh' || &filetype ==# 'sh' || &filetype ==# 'fsh'
-    !chmod +x %:p && %:p
-  endif
-endfunction
-
-command R :w <bar> execute Run()
-
-" Turn Mouse On/Off
-function! ToggleMouse()
-  if &mouse == 'a' " check if mouse is enabled
-    set mouse=
-  else
-    set mouse=a
-  endif
-endfunc
-
-command Mouse execute ToggleMouse()
+lua require'init'
 
 " pad line with filler character to a given length
 function! PaddedComment(length = 70, fill = "-")
@@ -65,37 +33,4 @@ function! PaddedComment(length = 70, fill = "-")
 endfunc
 
 command! -nargs=? Pad :call PaddedComment(<f-args>)
-
-" cargo check
-function Check()
-  if &filetype ==# 'rust'
-    !cargo check
-  endif
-endfunction
-
-" cargo test
-function Test()
-  if &filetype ==# 'rust'
-    !cargo test
-  endif
-endfunction
-
-" cargo fmt
-function Fmt()
-  if &filetype ==# 'rust'
-    !cargo fmt
-  endif
-endfunction
-
-" cargo clippy
-function Clippy()
-  if &filetype ==# 'rust'
-    !cargo clippy
-  endif
-endfunction
-
-command Check :w <bar> execute Check()
-command Test :w <bar> execute Test()
-command Fmt :w <bar> execute Fmt()
-command Clippy :w <bar> execute Clippy()
 

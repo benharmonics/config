@@ -2,62 +2,38 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
 -- Transparent packground
 autocmd('Colorscheme', {
-  command = 'highlight normal ctermbg=none guibg=none'
-})
-
--- Fold text within markers
-autocmd('FileType', {
-  pattern = { 'text', 'vim', 'lua' },
-  command = 'setlocal foldmethod=marker'
-})
-
--- Set Python indent
-autocmd('FileType', {
-  pattern = { 'python' },
-  command = 'setlocal shiftwidth=4 softtabstop=4'
-})
-
--- Set Golang indent
-autocmd('FileType', {
-  pattern = { 'go', 'templ' },
-  command = 'setlocal noexpandtab tabstop=4 shiftwidth=4'
-})
-
--- Set Rust indent
-autocmd('FileType', {
-  pattern = { 'rust' },
-  command = 'setlocal shiftwidth=2 softtabstop=2'
+  command = 'highlight normal ctermbg=none guibg=none',
 })
 
 -- go to insert mode immediately when entering terminal
 autocmd('TermOpen', {
-  command = 'setlocal listchars= nonumber norelativenumber nocursorline'
+  command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
 autocmd('TermOpen', {
   pattern = '',
-  command = 'startinsert'
+  command = 'startinsert',
 })
 
 -- Don't show exit code, just close terminal
 autocmd('TermClose', {
-  command = ':q'
+  command = ':q',
 })
 
 -- Close terminal buffer on process exit
 autocmd('BufLeave', {
   pattern = 'term://*',
-  command = 'stopinsert'
+  command = 'stopinsert',
 })
 
 -- Remove whitespace on save
 autocmd('BufWritePre', {
   pattern = '',
-  command = ":%s/\\s\\+$//e"
+  command = ":%s/\\s\\+$//e",
 })
 
 autocmd({ "BufWritePre" }, {
   pattern = { "*.templ" },
-  callback = vim.lsp.buf.format
+  callback = vim.lsp.buf.format,
 })
 
 -- Run gofmt and goimport for Golang files on save

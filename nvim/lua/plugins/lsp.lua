@@ -4,41 +4,39 @@ local lspconfig = require'lspconfig'
 lspconfig.clangd.setup { capabilities = capabilities }
 lspconfig.gopls.setup { capabilities = capabilities }
 lspconfig.pyright.setup { capabilities = capabilities }
-lspconfig.tsserver.setup { capabilities = capabilities }
 lspconfig.templ.setup { capabilities = capabilities }
-lspconfig.hls.setup{ capabilities = capabilities }
---lspconfig.htmx.setup({
---    capabilities = capabilities,
---    filetypes = { "html", "templ" },
---})
+lspconfig.hls.setup { capabilities = capabilities }
+lspconfig.dartls.setup { capabilities = capabilities }
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
+  filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = vue_language_server_path,
+        languages = { "vue" },
+      },
+    },
+  },
+}
 lspconfig.tailwindcss.setup({
     capabilities = capabilities,
-    filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    filetypes = { "templ", "astro", "javascript", "typescript", "react", "typescriptreact", "javascriptreact" },
     settings = {
       tailwindCSS = {
         includeLanguages = {
           templ = "html",
+          typescript = "html",
         },
       },
     },
 })
---lspconfig.rust_analyzer.setup{
---  settings = {
---    ['rust-analyzer'] = {}
---  }
---}
-
--- Rust Tools
-local rt = require'rust-tools'
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set('n', '<leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-    },
+lspconfig.ocamllsp.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+    root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
 })
 
 -- Global mappings.

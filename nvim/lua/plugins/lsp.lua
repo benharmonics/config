@@ -1,26 +1,18 @@
 -- Setup language servers.
 local capabilities = require'cmp_nvim_lsp'.default_capabilities()
 local lspconfig = require'lspconfig'
-lspconfig.clangd.setup { capabilities = capabilities }
-lspconfig.gopls.setup { capabilities = capabilities }
+lspconfig.clangd.setup  { capabilities = capabilities }
+lspconfig.gopls.setup   { capabilities = capabilities }
 lspconfig.pyright.setup { capabilities = capabilities }
-lspconfig.templ.setup { capabilities = capabilities }
-lspconfig.hls.setup { capabilities = capabilities }
-lspconfig.dartls.setup { capabilities = capabilities }
-lspconfig.tsserver.setup {
+lspconfig.templ.setup   { capabilities = capabilities }
+lspconfig.hls.setup     { capabilities = capabilities }
+lspconfig.dartls.setup  { capabilities = capabilities }
+lspconfig.vuels.setup   { capabilities = capabilities }
+lspconfig.ts_ls.setup   {
   capabilities = capabilities,
   filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = vue_language_server_path,
-        languages = { "vue" },
-      },
-    },
-  },
 }
-lspconfig.tailwindcss.setup({
+lspconfig.tailwindcss.setup {
     capabilities = capabilities,
     filetypes = { "templ", "astro", "javascript", "typescript", "react", "typescriptreact", "javascriptreact" },
     settings = {
@@ -31,13 +23,13 @@ lspconfig.tailwindcss.setup({
         },
       },
     },
-})
-lspconfig.ocamllsp.setup({
+}
+lspconfig.ocamllsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
     root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
-})
+}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

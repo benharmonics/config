@@ -8,8 +8,6 @@
 " | ▓▓ ▓▓  | ▓▓ ▓▓  \▓▓  ▓▓  \   \▓▓▓  | ▓▓ ▓▓ | ▓▓ | ▓▓
 "  \▓▓\▓▓   \▓▓\▓▓   \▓▓▓▓ \▓▓    \▓    \▓▓\▓▓  \▓▓  \▓▓
 
-lua require'init'
-
 " pad line with filler character to a given length
 function! PaddedComment(length = 70, fill = "-")
   let line = getline('.')

@@ -1,3 +1,7 @@
+require'config.lazy'
+require'autocommands'
+require'mappings'
+
 ------------------------------------------------------------------------
 -- General Neovim settings and configuration
 ------------------------------------------------------------------------
@@ -13,7 +17,7 @@ opt.mouse = 'a'                 -- Enable mouse
 opt.clipboard = 'unnamedplus'   -- Copy/paste to system clipboard
 -- Have terminal open in a split pane rather than current window
 vim.cmd([[command! -nargs=* T w | split | terminal <args>]])
-vim.filetype.add({ extension = { templ = "templ" } })
+vim.filetype.add({ extension = { templ = 'templ' } })
 
 ------------------------------------------------------------------------
 -- UI
@@ -33,6 +37,7 @@ opt.visualbell = true       -- Visual alert rather than audio
 opt.cmdheight = 2           -- Set command window to 2 lines
 opt.wrap = false            -- Don't wrap text
 opt.encoding = 'utf-8'      -- Text encoding
+-- vim.cmd[[highlight Normal ctermbg=NONE guibg=NONE]]
 
 ------------------------------------------------------------------------
 -- Tabs, indentation

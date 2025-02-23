@@ -1,14 +1,13 @@
 -- Helper functions
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+local function map(mode, shortcut, command, opts)
+  vim.api.nvim_set_keymap(mode, shortcut, command, opts or { noremap = true, silent = true })
 end
-function nmap(shortcut, command) map('n', shortcut, command) end
-function imap(shortcut, command) map('i', shortcut, command) end
-function tmap(shortcut, command) map('t', shortcut, command) end
+local function nmap(shortcut, command, opts) map('n', shortcut, command, opts) end
+local function imap(shortcut, command, opts) map('i', shortcut, command, opts) end
+local function tmap(shortcut, command, opts) map('t', shortcut, command, opts) end
 
--- Map Y to act like D and C, i.e. to yank until EOL, rather than act exactly
--- like yy, which is the default
-vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = false, silent = true })
+-- Map Y to act like D and C, i.e. to yank until EOL, rather than act exactly like yy, which is the default
+nmap('Y', 'y$', { noremap = false, silent = true })
 
 -- Map <C-L> (redraw screen) to also turn off search highlighting until next search
 nmap('<c-l>', ':nohl<cr><c-l>')
@@ -36,7 +35,7 @@ imap('[;<cr>', '[<cr>];<esc>O')
 imap('(;<cr>', '(<cr>);<esc>O')
 
 -- jump_over jumps over closing brackets if you type the bracket char
-function jump_over(char)
+local function jump_over(char)
   local _, col = unpack(vim.api.nvim_win_get_cursor(0))
   local char_on_cursor = vim.api.nvim_get_current_line():sub(col+1, col+1)
   if char_on_cursor == char

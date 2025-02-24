@@ -4,17 +4,28 @@ end
 
 return {
   { 'mfussenegger/nvim-dap' },
-  { 'preservim/nerdtree' },
-  { 'hiphish/rainbow-delimiters.nvim' },
+  { 'preservim/nerdtree', cmd = { "NERDTreeToggle" } },
   {
     'shortcuts/no-neck-pain.nvim',
     version = '*',
-    opts = { autocmds = { enableOnVimEnter = true } } ,
+    opts = {
+      autocmds = { enableOnVimEnter = true },
+      buffers = {
+        right = { scratchPad = { enabled = true, pathToFile = "note-right.md" } },
+        left = { scratchPad = { enabled = true, pathToFile = "note-left.md" } },
+        bo = { filetype = 'markdown' },
+        wo = { fillchars = 'eob: ' },
+      },
+    },
   },
 
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'BurntSushi/ripgrep',    -- optional - grep
+      'sharkdp/fd',            -- optional - find
+    },
     init = function()
       local builtin = require'telescope.builtin'
       nmap('<leader>ff', builtin.find_files)
@@ -43,9 +54,10 @@ return {
   },
 
   -- Language tools
-  { 'ray-x/go.nvim', opts = {} },
+  { 'ray-x/go.nvim', ft = 'go', opts = {} },
   {
     'simrat39/rust-tools.nvim',
+    ft = 'rust',
     opts = function()
       local rt = require'rust-tools'
       return {
@@ -62,6 +74,7 @@ return {
   },
   {
     'nvim-flutter/flutter-tools.nvim',
+    ft = 'dart',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim', -- optional for vim.ui.select
@@ -69,22 +82,17 @@ return {
     opts = {},
   },
 
-  -- Colorschemes
-  {
-    'xiyaowong/transparent.nvim',
-    lazy = false,
-    build = ':TransparentEnable',
-  },
+  -- Colors, UI
+  { 'xiyaowong/transparent.nvim' },
+  { 'hiphish/rainbow-delimiters.nvim' },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd[[colorscheme catppuccin]]
-    end,
+    config = function() vim.cmd[[colorscheme catppuccin]] end,
   },
-  { 'rafamadriz/neon' },
-  { 'marko-cerovac/material.nvim' },
-  { 'Mofiqul/dracula.nvim' },
+  { 'rafamadriz/neon', lazy = true },
+  { 'marko-cerovac/material.nvim', lazy = true },
+  { 'Mofiqul/dracula.nvim', lazy = true },
 }

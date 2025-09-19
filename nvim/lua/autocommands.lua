@@ -35,7 +35,6 @@ aucmd({ 'BufWritePre' }, {
 local import_sync_group = vim.api.nvim_create_augroup('GoImport', {})
 aucmd('BufWritePre', {
   pattern = '*.go',
-  callback = function() require'go.format'.goimport() end,
+  callback = function() require 'go.format'.goimport() end,
   group = import_sync_group,
 })
-

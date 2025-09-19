@@ -5,7 +5,7 @@ end
 return {
   { 'neovim/nvim-lspconfig' },
   { 'mfussenegger/nvim-dap' },
-  { 'preservim/nerdtree', cmd = { "NERDTreeToggle" } },
+  { 'preservim/nerdtree',   cmd = { "NERDTreeToggle" } },
 
   {
     'nvim-telescope/telescope.nvim',
@@ -15,7 +15,7 @@ return {
       'sharkdp/fd',            -- optional - find
     },
     init = function()
-      local builtin = require'telescope.builtin'
+      local builtin = require 'telescope.builtin'
       nmap('<leader>ff', builtin.find_files)
       nmap('<leader>fg', builtin.live_grep)
       nmap('<leader>fb', builtin.buffers)
@@ -42,12 +42,12 @@ return {
   },
 
   -- Language tools
-  { 'ray-x/go.nvim', ft = 'go', opts = {} },
+  { 'ray-x/go.nvim',                  ft = 'go', opts = {} },
   {
     'simrat39/rust-tools.nvim',
     ft = 'rust',
     opts = function()
-      local rt = require'rust-tools'
+      local rt = require 'rust-tools'
       return {
         server = {
           on_attach = function(_, bufnr)
@@ -78,9 +78,50 @@ return {
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
-    config = function() vim.cmd[[colorscheme catppuccin]] end,
+    config = function() vim.cmd [[colorscheme catppuccin]] end,
   },
-  { 'rafamadriz/neon', lazy = true },
+  { 'rafamadriz/neon',             lazy = true },
   { 'marko-cerovac/material.nvim', lazy = true },
-  { 'Mofiqul/dracula.nvim', lazy = true },
+  { 'Mofiqul/dracula.nvim',        lazy = true },
+
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    main = 'nvim-treesitter.configs',
+    opts_extend = { 'ensure_installed' },
+    dependencies = {
+      "vrischmann/tree-sitter-templ",
+    },
+    opts = {
+      highlight = { enable = true },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'go',
+        'javascript',
+        'jsdoc',
+        'json',
+        'jsonc',
+        'lua',
+        'luadoc',
+        'luap',
+        'markdown',
+        'markdown_inline',
+        'printf',
+        'python',
+        'query',
+        'regex',
+        'templ',
+        'toml',
+        'tsx',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'xml',
+        'yaml',
+      },
+    },
+  },
 }

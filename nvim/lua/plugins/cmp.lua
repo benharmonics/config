@@ -11,7 +11,7 @@ return {
       'hrsh7th/vim-vsnip',
     },
     opts = function()
-      local cmp = require'cmp'
+      local cmp = require 'cmp'
 
       -- Set configuration for specific filetype.
       cmp.setup.filetype('gitcommit', {

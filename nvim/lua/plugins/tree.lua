@@ -4,6 +4,9 @@ return {
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts_extend = { 'ensure_installed' },
+    dependencies = {
+      "vrischmann/tree-sitter-templ",
+    },
     opts = {
       highlight = { enable = true },
       ensure_installed = {
@@ -25,6 +28,7 @@ return {
         'python',
         'query',
         'regex',
+        'templ',
         'toml',
         'tsx',
         'typescript',

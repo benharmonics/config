@@ -3,21 +3,9 @@ local function nmap(shortcut, command, opts)
 end
 
 return {
+  { 'neovim/nvim-lspconfig' },
   { 'mfussenegger/nvim-dap' },
   { 'preservim/nerdtree', cmd = { "NERDTreeToggle" } },
-  {
-    'shortcuts/no-neck-pain.nvim',
-    version = '*',
-    opts = {
-      autocmds = { enableOnVimEnter = true },
-      buffers = {
-        right = { scratchPad = { enabled = true, pathToFile = "note-right.md" } },
-        left = { scratchPad = { enabled = true, pathToFile = "note-left.md" } },
-        bo = { filetype = 'markdown' },
-        wo = { fillchars = 'eob: ' },
-      },
-    },
-  },
 
   {
     'nvim-telescope/telescope.nvim',

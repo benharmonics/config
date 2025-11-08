@@ -44,23 +44,6 @@ return {
   -- Language tools
   { 'ray-x/go.nvim',                  ft = 'go', opts = {} },
   {
-    'simrat39/rust-tools.nvim',
-    ft = 'rust',
-    opts = function()
-      local rt = require 'rust-tools'
-      return {
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            nmap('<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            nmap('<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
-          end,
-        },
-      }
-    end,
-  },
-  {
     'nvim-flutter/flutter-tools.nvim',
     ft = 'dart',
     dependencies = {
@@ -68,6 +51,25 @@ return {
       'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
     opts = {},
+  },
+  {
+    'gruvw/strudel.nvim',
+    build = 'npm install',
+    config = function()
+      require 'strudel'.setup({
+        update_on_save = true,
+      })
+    end,
+    init = function()
+      local strudel = require 'strudel'
+      vim.keymap.set('n', '<leader>sl', strudel.launch, { desc = 'Launch Strudel' })
+      vim.keymap.set('n', '<leader>sq', strudel.quit, { desc = 'Quit Strudel' })
+      vim.keymap.set('n', '<leader>st', strudel.toggle, { desc = 'Strudel Toggle Play/Stop' })
+      vim.keymap.set('n', '<leader>su', strudel.update, { desc = 'Strudel Update' })
+      vim.keymap.set('n', '<leader>ss', strudel.stop, { desc = 'Strudel Stop Playback' })
+      vim.keymap.set('n', '<leader>sb', strudel.set_buffer, { desc = 'Strudel set current buffer' })
+      vim.keymap.set('n', '<leader>sx', strudel.execute, { desc = 'Strudel set current buffer and update' })
+    end,
   },
 
   -- Colors, UI
@@ -83,45 +85,4 @@ return {
   { 'rafamadriz/neon',             lazy = true },
   { 'marko-cerovac/material.nvim', lazy = true },
   { 'Mofiqul/dracula.nvim',        lazy = true },
-
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
-    opts_extend = { 'ensure_installed' },
-    dependencies = {
-      "vrischmann/tree-sitter-templ",
-    },
-    opts = {
-      highlight = { enable = true },
-      ensure_installed = {
-        'bash',
-        'c',
-        'diff',
-        'html',
-        'go',
-        'javascript',
-        'jsdoc',
-        'json',
-        'jsonc',
-        'lua',
-        'luadoc',
-        'luap',
-        'markdown',
-        'markdown_inline',
-        'printf',
-        'python',
-        'query',
-        'regex',
-        'templ',
-        'toml',
-        'tsx',
-        'typescript',
-        'vim',
-        'vimdoc',
-        'xml',
-        'yaml',
-      },
-    },
-  },
 }

@@ -38,7 +38,10 @@ style = "bold white"
 
 [git_status]
 style = "bright white"
-format = "$all_status$head_behind"
+modified = "δ"
+stashed = "🪏"
+conflicted = "🙅‍♂️"
+# format = "$all_status$head_behind"
 
 [package]
 disabled = true

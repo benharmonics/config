@@ -44,7 +44,7 @@ format = "$all_status$head_behind"
 disabled = true
 
 [line_break]
-disabled = true
+disabled = false
 
 [cmd_duration]
 disabled = true

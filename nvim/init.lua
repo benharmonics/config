@@ -4,6 +4,9 @@ require 'mappings'
 require 'lsp'
 
 vim.filetype.add({ extension = { templ = 'templ' } })
+vim.filetype.add({ filename = { ['justfile'] = 'just', ['Justfile'] = 'just' } })
+vim.treesitter.language.register('make', 'just')
+
 vim.cmd [[syntax enable]]
 vim.cmd [[set nostartofline]]
 -- Have terminal open in a split pane rather than current window

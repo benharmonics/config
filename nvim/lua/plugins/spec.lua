@@ -3,6 +3,27 @@ local function nmap(shortcut, command, opts)
 end
 
 return {
+  {
+    'mason-org/mason-lspconfig.nvim',
+    opts = {
+      ensure_installed = {
+        'gopls',
+        'pyright',
+        'ts_ls',
+        'vue_ls',
+        'vtsls',
+        'eslint',
+        'rust_analyzer',
+        'tailwindcss',
+        'lua_ls',
+      },
+    },
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig',
+    },
+  },
+
   { 'neovim/nvim-lspconfig' },
   { 'mfussenegger/nvim-dap' },
   { 'preservim/nerdtree',   cmd = { "NERDTreeToggle" } },

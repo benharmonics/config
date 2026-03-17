@@ -4,7 +4,9 @@ local lsps = {
   { 'templ' },
   { 'hls' },
   { 'dartls' },
-  { 'vuels' },
+  { 'vue_ls' },
+  { 'vtsls' },
+  { 'eslint' },
   { 'rust_analyzer' },
 
   {
